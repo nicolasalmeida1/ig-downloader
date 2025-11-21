@@ -55,7 +55,9 @@ class VideoDownloadService:
                 else:
                     logger.warning(f"yt-dlp falhou na tentativa {attempt + 1}")
                     if result.stderr:
-                        logger.error(f"Erro: {result.stderr[:200]}")
+                        logger.error(f"Erro completo: {result.stderr}")
+                    if result.stdout:
+                        logger.debug(f"Output: {result.stdout}")
                     
                     if attempt < self.retries - 1:
                         time.sleep(5)
@@ -93,7 +95,7 @@ class VideoDownloadService:
                     logger.info(f"[{idx}/{len(urls_with_posts)}] post_{post_num}... OK")
                 else:
                     stats['failed'] += 1
-                    logger.warning(f"[{idx}/{len(urls_with_posts)}] post_{post_num}... ERRO")
+                    logger.warning(f"[{idx}/{len(urls_with_posts)}] post_{post_num}... ERRO (URL: {url})")
                     try:
                         os.rmdir(post_dir)
                     except:

@@ -84,6 +84,7 @@ class InstagramURLCollector:
         
         post_links = []
         scroll_attempts = 0
+        consecutive_no_new = 0
         
         while scroll_attempts < self.max_scroll_attempts:
             
@@ -99,12 +100,22 @@ class InstagramURLCollector:
                     post_links.append(href)
                     new_urls_count += 1
             
+            if new_urls_count == 0:
+                consecutive_no_new += 1
+            else:
+                consecutive_no_new = 0
+            
             progress_pct = ((scroll_attempts + 1) / self.max_scroll_attempts) * 100
             logger.info(
                 f"Scroll {scroll_attempts + 1}/{self.max_scroll_attempts} | "
                 f"URLs: {len(post_links)} | Novos: {new_urls_count} | "
+                f"Sem novos: {consecutive_no_new} | "
                 f"Progresso: {progress_pct:.1f}%"
             )
+            
+            if consecutive_no_new >= 5:
+                logger.info(f"5 scrolls seguidos sem novas URLs. Parando coleta antecipadamente.")
+                break
             
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(self.delay_between_requests)
