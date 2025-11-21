@@ -125,6 +125,31 @@ Aumentar delay em `.env`:
 DELAY_BETWEEN_REQUESTS=10  # De 3 para 10
 ```
 
+### ⚠️ Rate Limit do Instagram
+
+Se receber erro **"rate-limit reached"** ou **"Too Many Requests"**:
+
+1. **Parar downloads imediatamente** para evitar bloqueio permanente
+2. **Aguardar 15-30 minutos** antes de tentar novamente
+3. **Recomendação: Dividir em lotes de ~100 downloads**
+   - Fazer 100 downloads
+   - Aguardar 30 minutos
+   - Retomar os próximos 100
+
+**Configuração segura:**
+```env
+VIDEOS_TO_UPLOAD_PER_RUN=100     # Máximo 100 por vez
+DELAY_BETWEEN_REQUESTS=5          # 5 segundos entre requisições
+VIDEO_RETRIES=2                   # Menos tentativas = menos requisições
+```
+
+**Como retomar de um ponto específico:**
+Editar `scripts/download_videos.py`:
+```python
+# Mudar linha:
+stats = use_case.execute("post_urls.txt", start_from=151)  # começar do 151
+```
+
 ### Vídeos com qualidade ruim?
 
 Verificar em `.env`:

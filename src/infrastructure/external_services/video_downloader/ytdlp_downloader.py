@@ -67,7 +67,9 @@ class VideoDownloadService:
                         elif "Cookie database" in full_error or "Could not copy" in full_error:
                             logger.warning(f"Erro de cookies do navegador, tentando novamente...")
                         elif "rate.limit" in full_error.lower() or "rate-limit" in full_error.lower():
-                            logger.warning(f"Rate limit atingido. Aguardando 10 segundos...")
+                            logger.warning(f"⚠️  RATE LIMIT ATINGIDO!")
+                            logger.warning(f"Aguarde 15-30 minutos antes de retomar!")
+                            logger.warning(f"Tentando novamente em 10 segundos...")
                             if attempt < self.retries - 1:
                                 time.sleep(10)
                             continue

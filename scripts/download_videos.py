@@ -31,9 +31,13 @@ def main():
     print(f"Perfil alvo: @{config.insta_target_profile}")
     print(f"Diretório de saída: {config.output_dir}")
     print("=" * 70)
+    print("\n⚠️  AVISO: Rate Limit do Instagram")
+    print("   • Máximo recomendado: ~100 downloads por vez")
+    print("   • Se receber 'rate-limit', aguarde 15-30 minutos")
+    print("   • Aumentar DELAY_BETWEEN_REQUESTS em .env se necessário")
+    print("=" * 70)
     
     try:
-        # Verificar se arquivo de URLs existe
         if not Path("post_urls.txt").exists():
             print("\n✗ Arquivo 'post_urls.txt' não encontrado!")
             print("Execute primeiro: python scripts/collect_urls.py")
