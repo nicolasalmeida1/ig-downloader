@@ -5,7 +5,7 @@ python-dotenv==1.0.0
 selenium==4.17.2
 
 # Video Download
-yt-dlp==2023.9.24
+yt-dlp==2025.11.12
 
 # Google API
 google-auth-oauthlib==1.2.0
