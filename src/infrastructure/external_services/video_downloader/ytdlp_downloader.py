@@ -35,6 +35,7 @@ class VideoDownloadService:
                     "--no-warnings",
                     "--username", self.username,
                     "--password", self.password,
+                    "--cookies-from-browser", "chrome",
                     url
                 ]
                 
@@ -55,7 +56,16 @@ class VideoDownloadService:
                 else:
                     logger.warning(f"yt-dlp falhou na tentativa {attempt + 1}")
                     if result.stderr:
-                        logger.error(f"Erro completo: {result.stderr}")
+                        full_error = result.stderr
+                        logger.error(f"Erro completo: {full_error}")
+                        
+                        if "There is no video in this post" in full_error:
+                            logger.info(f"Post {url} é apenas imagem, pulando...")
+                            return False, None
+                        elif "empty media response" in full_error:
+                            logger.info(f"Post {url} não está acessível, pulando...")
+                            return False, None
+                    
                     if result.stdout:
                         logger.debug(f"Output: {result.stdout}")
                     
