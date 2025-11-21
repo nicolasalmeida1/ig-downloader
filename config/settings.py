@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 class Config:
     
     def __init__(self):
-        env_path = Path(__file__).parent.parent.parent / '.env'
+        env_path = Path(__file__).parent.parent / '.env'
         load_dotenv(dotenv_path=env_path)
     
     @property
