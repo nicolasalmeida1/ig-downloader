@@ -35,7 +35,6 @@ class VideoDownloadService:
                     "--no-warnings",
                     "--username", self.username,
                     "--password", self.password,
-                    "--cookies-from-browser", "chrome",
                     url
                 ]
                 
@@ -60,11 +59,18 @@ class VideoDownloadService:
                         logger.error(f"Erro completo: {full_error}")
                         
                         if "There is no video in this post" in full_error:
-                            logger.info(f"Post {url} é apenas imagem, pulando...")
+                            logger.info(f"Post é apenas imagem, pulando...")
                             return False, None
                         elif "empty media response" in full_error:
-                            logger.info(f"Post {url} não está acessível, pulando...")
+                            logger.info(f"Post não está acessível, pulando...")
                             return False, None
+                        elif "Cookie database" in full_error or "Could not copy" in full_error:
+                            logger.warning(f"Erro de cookies do navegador, tentando novamente...")
+                        elif "rate.limit" in full_error.lower() or "rate-limit" in full_error.lower():
+                            logger.warning(f"Rate limit atingido. Aguardando 10 segundos...")
+                            if attempt < self.retries - 1:
+                                time.sleep(10)
+                            continue
                     
                     if result.stdout:
                         logger.debug(f"Output: {result.stdout}")
