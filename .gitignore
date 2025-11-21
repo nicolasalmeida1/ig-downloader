@@ -1,0 +1,102 @@
+# ==========================================
+# Environment Variables (SENSITIVE)
+# ==========================================
+.env
+.env.local
+.env.*.local
+.env.prod
+.env.test
+
+# ==========================================
+# Python
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ==========================================
+# Virtual Environments
+# ==========================================
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ==========================================
+# IDE & Editors
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+*.iml
+
+# ==========================================
+# Logs
+# ==========================================
+*.log
+logs/
+*.log.*
+
+# ==========================================
+# Instagram Downloader Specific
+# ==========================================
+# Data files (generated during runtime)
+post_urls.txt
+insta_cookies.pkl
+download.log
+downloaded_posts.json
+
+# Temporary files
+*.pkl
+*.pickle
+*.tmp
+*.cache
+
+# OS specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Project output directories
+downloads/
+output/
+temp/
+.tmp/
+
+# ==========================================
+# Do NOT ignore (important project files)
+# ==========================================
+# Uncomment if you want to track these
+# !.env.example
+# !requirements.txt
+# !README.md

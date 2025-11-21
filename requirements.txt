@@ -1,0 +1,19 @@
+# Core
+python-dotenv==1.0.0
+
+# Selenium
+selenium==4.17.2
+
+# Video Download
+yt-dlp==2024.12.2
+
+# Google API
+google-auth-oauthlib==1.2.0
+google-auth-httplib2==0.2.0
+google-api-python-client==2.108.0
+
+# Requests
+requests==2.31.0
+
+# Logging
+python-dateutil==2.8.2
