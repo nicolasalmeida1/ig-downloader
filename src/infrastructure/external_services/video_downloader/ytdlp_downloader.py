@@ -15,6 +15,8 @@ class VideoDownloadService:
         self.format = config.video_format
         self.retries = config.video_retries
         self.timeout = config.video_timeout
+        self.username = config.insta_username
+        self.password = config.insta_password
     
     def download_video(self, url: str, output_path: str, filename: str = "video") -> Tuple[bool, Optional[str]]:
         os.makedirs(output_path, exist_ok=True)
@@ -31,6 +33,8 @@ class VideoDownloadService:
                     "-f", self.format,
                     "-o", output_template,
                     "--no-warnings",
+                    "--username", self.username,
+                    "--password", self.password,
                     url
                 ]
                 
