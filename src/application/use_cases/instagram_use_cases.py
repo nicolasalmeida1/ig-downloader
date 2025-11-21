@@ -52,7 +52,9 @@ class DownloadInstagramVideosUseCase:
         urls_with_posts = [
             (url, idx) for idx, url in enumerate(urls, start=1)
             if idx >= start_from
-        ]        logger.info(f"Iniciando download de {len(urls_with_posts)} vídeos a partir de post_{start_from}")
+        ]
+        
+        logger.info(f"Iniciando download de {len(urls_with_posts)} vídeos a partir de post_{start_from}")
         
         stats = self.downloader.batch_download(urls_with_posts)
         
